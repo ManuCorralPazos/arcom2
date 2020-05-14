@@ -141,14 +141,15 @@ int main(int argc, char **argv){
     }
     long int N=10;
     N=pow(10, q);
-    struct quaternion *a, *b;
+    struct quaternion *a=NULL;
+    struct quaternion *b=NULL;
     a=(struct quaternion*)malloc(N*sizeof(struct quaternion));
     b=(struct quaternion*)malloc(N*sizeof(struct quaternion));
     inicializarAleatorio(a, N);
     inicializarAleatorio(b, N);
-    struct quaternion *c;
+    struct quaternion *c=NULL;
     c=(struct quaternion*)malloc(N*sizeof(struct quaternion));
-    struct quaternion *dp;
+    struct quaternion *dp=NULL;
     dp=(struct quaternion*)malloc(sizeof(struct quaternion));
     inicializarACero(dp, 1);
     

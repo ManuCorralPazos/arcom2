@@ -152,9 +152,9 @@ int main(int argc, char **argv){
     }
     N=pow(10, q);
 
-    struct quaternion *__restrict__ a=NULL;
-    struct quaternion *__restrict__ b=NULL;
-    struct quaternion *__restrict__ dp=NULL;
+    struct quaternion *a=NULL;
+    struct quaternion *b=NULL;
+    struct quaternion *dp=NULL;
     a=(struct quaternion*)malloc(N*sizeof(struct quaternion));
     b=(struct quaternion*)malloc(N*sizeof(struct quaternion));
     inicializarAleatorio(a, N);

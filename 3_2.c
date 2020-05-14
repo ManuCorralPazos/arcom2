@@ -195,44 +195,49 @@ int main(int argc, char **argv){
             __m256d bCuatro=_mm256_set_pd(b[i+3].cuatro, b[i+2].cuatro, b[i+1].cuatro, b[i].cuatro);
         
             __m256d cUno=_mm256_mul_pd(aDos, bDos);
-            //cUno=_mm256_fmadd_pd(aTres, bTres, cUno);
-            //cUno=_mm256_fmadd_pd(aCuatro, bCuatro, cUno);
-            //cUno=_mm256_fmsub_pd(aUno, bUno, cUno);
-            cUno=_mm256_add_pd(aTres, bTres);
-            cUno=_mm256_add_pd(aCuatro, bCuatro);
-            cUno=_mm256_sub_pd(aUno, bUno);
+            cUno=_mm256_fmadd_pd(aTres, bTres, cUno);
+            cUno=_mm256_fmadd_pd(aCuatro, bCuatro, cUno);
+            cUno=_mm256_fmsub_pd(aUno, bUno, cUno);
+
+            //cUno=_mm256_add_pd(aTres, bTres);
+            //cUno=_mm256_add_pd(aCuatro, bCuatro);
+            //cUno=_mm256_sub_pd(aUno, bUno);
 
             __m256d cDos=_mm256_mul_pd(aTres, bTres);
-            //cDos=_mm256_fmadd_pd(aUno, bDos, cDos);
-            //cDos=_mm256_fmadd_pd(aDos, bUno, cDos);
-            //cDos=_mm256_fmsub_pd(aTres, bCuatro, cDos);
-            cDos=_mm256_add_pd(aUno, bDos);
-            cDos=_mm256_add_pd(aDos, bUno);
-            cDos=_mm256_sub_pd(aTres, bCuatro);
+            cDos=_mm256_fmadd_pd(aUno, bDos, cDos);
+            cDos=_mm256_fmadd_pd(aDos, bUno, cDos);
+            cDos=_mm256_fmsub_pd(aTres, bCuatro, cDos);
+
+            //cDos=_mm256_add_pd(aUno, bDos);
+            //cDos=_mm256_add_pd(aDos, bUno);
+            //cDos=_mm256_sub_pd(aTres, bCuatro);
 
             __m256d cTres=_mm256_mul_pd(aDos, bCuatro);
-            //cTres=_mm256_fmadd_pd(aUno, bTres, cTres);
-            //cTres=_mm256_fmadd_pd(aTres, bUno, cTres);
-            //cTres=_mm256_fmsub_pd(aCuatro, bDos, cTres);
-            cTres=_mm256_add_pd(aUno, bTres);
-            cTres=_mm256_add_pd(aTres, bUno);
-            cTres=_mm256_sub_pd(aCuatro,bDos);
+            cTres=_mm256_fmadd_pd(aUno, bTres, cTres);
+            cTres=_mm256_fmadd_pd(aTres, bUno, cTres);
+            cTres=_mm256_fmsub_pd(aCuatro, bDos, cTres);
+
+            //cTres=_mm256_add_pd(aUno, bTres);
+            //cTres=_mm256_add_pd(aTres, bUno);
+            //cTres=_mm256_sub_pd(aCuatro,bDos);
 
             __m256d cCuatro=_mm256_mul_pd(aTres, bDos);
-            //cCuatro=_mm256_fmadd_pd(aUno, bCuatro, cCuatro);
-            //cCuatro=_mm256_fmadd_pd(aDos, bTres, cCuatro);
-            //cCuatro=_mm256_fmsub_pd(aCuatro, bUno, cCuatro);
-            cCuatro=_mm256_add_pd(aUno, bCuatro);
-            cCuatro=_mm256_add_pd(aDos, bTres);
-            cCuatro=_mm256_sub_pd(aCuatro, bUno);
+            cCuatro=_mm256_fmadd_pd(aUno, bCuatro, cCuatro);
+            cCuatro=_mm256_fmadd_pd(aDos, bTres, cCuatro);
+            cCuatro=_mm256_fmsub_pd(aCuatro, bUno, cCuatro);
+
+            //cCuatro=_mm256_add_pd(aUno, bCuatro);
+            //cCuatro=_mm256_add_pd(aDos, bTres);
+            //cCuatro=_mm256_sub_pd(aCuatro, bUno);
 
             __m256d eUno=_mm256_mul_pd(cDos, cDos);
-            //eUno=_mm256_fmadd_pd(cTres, cTres, eUno);    
-            //eUno=_mm256_fmadd_pd(cCuatro, cCuatro, eUno);
-            //eUno=_mm256_fmsub_pd(cUno, cDos, eUno);
-            eUno=_mm256_add_pd(cTres, cTres);
-            eUno=_mm256_add_pd(cCuatro, cCuatro);
-            eUno=_mm256_add_pd(cUno, cDos);
+            eUno=_mm256_fmadd_pd(cTres, cTres, eUno);    
+            eUno=_mm256_fmadd_pd(cCuatro, cCuatro, eUno);
+            eUno=_mm256_fmsub_pd(cUno, cDos, eUno);
+
+            //eUno=_mm256_add_pd(cTres, cTres);
+            //eUno=_mm256_add_pd(cCuatro, cCuatro);
+            //eUno=_mm256_add_pd(cUno, cDos);
           
             __m256d dUno=_mm256_add_pd(eUno, dUno);
             
