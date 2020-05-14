@@ -180,6 +180,10 @@ int main(int argc, char **argv){
         //for(int i=0; i<N; i++){
           //  *dp=operacionQuaternion(*dp, multiplicarQuaternion(a[i], b[i]));
         //}
+        __m256d dUno;
+        __m256d dDos;
+        __m256d dTres;
+        __m256d dCuatro;
         for(int i=0; i<N; i+=4){
             __m256d aUno=_mm256_set_pd(a[i+3].uno, a[i+2].uno, a[i+1].uno, a[i].uno);
             __m256d aDos=_mm256_set_pd(a[i+3].dos, a[i+2].dos, a[i+1].dos, a[i].dos);
@@ -236,21 +240,33 @@ int main(int argc, char **argv){
             //eUno=_mm256_add_pd(cCuatro, cCuatro);
             //eUno=_mm256_add_pd(cUno, cDos);
           
-            __m256d dUno=_mm256_add_pd(eUno, dUno);
+            dUno=_mm256_add_pd(eUno, dUno);
             
             __m256d eDos=_mm256_mul_pd(cUno, cDos);
             eDos=_mm256_add_pd(eDos, eDos);
-            __m256d dDos=_mm256_add_pd(eDos, dDos);
+            dDos=_mm256_add_pd(eDos, dDos);
 
             __m256d eTres=_mm256_mul_pd(cUno, cTres);
             eTres=_mm256_add_pd(eTres, eTres);
-            __m256d dTres=_mm256_add_pd(eTres, dTres);
+            dTres=_mm256_add_pd(eTres, dTres);
 
             __m256d eCuatro=_mm256_mul_pd(cUno, cCuatro);
             eCuatro=_mm256_add_pd(eCuatro, eCuatro);
-            __m256d dCuatro=_mm256_add_pd(eCuatro, dCuatro);
-
+            dCuatro=_mm256_add_pd(eCuatro, dCuatro);
         }
+    
+        __m256d suma12=_mm256_add_pd(dUno, dDos);
+        __m256d suma34=_mm256_hadd_pd(dTres, dCuatro);
+
+        __m128d aux12 =_mm256_castpd256_pd128(suma12);
+        __m256d parcial1=_mm256_insertf128_pd(suma34, aux12, 0);
+
+        __m256d parcial2=_mm256_permute2f128_pd(suma12, suma34, 0x12);
+
+        __m256d r=_mm256_add_pd(parcial1,parcial2);
+
+        _mm256_store_pd((double*)dp, r);
+
         ck[vez]=get_counter();
     }
     
