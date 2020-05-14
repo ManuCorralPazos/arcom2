@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
-//#include <math.h>
+#include <math.h>
 #include <immintrin.h>
 
 struct quaternion{
@@ -151,10 +151,7 @@ int main(int argc, char **argv){
     if(argc>1){
         q=atoi(argv[1]);
     }
-   // N=pow(10, q);
-    for(int k=0; k<q; k++){
-        N=N*10;
-    }
+    N=pow(10, q);
     printf("%ld\n", N);
        
     struct quaternion *__restrict__ a=NULL;
